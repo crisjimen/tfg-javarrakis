@@ -8,12 +8,17 @@ import io.jsonwebtoken.JwtParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+
+/**
+ * Clase que se encarga de generar y verificar los JWTs
+ */
 
 @Component
 public class JWTUtil {
@@ -60,7 +65,7 @@ public class JWTUtil {
     }
 
     /**
-     * Obtiene el subject del JWT
+     * Obtiene el subject del JWT (email)
      */
     public String getValue(String jwt) {
         Claims claims = getParser().parseClaimsJws(jwt).getBody();
@@ -82,5 +87,21 @@ public class JWTUtil {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build();
+    }
+
+    /**
+     * Verifica si el token es válido (ha expirado y es válido)
+     */
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+
+        final String email = getValue(token);
+        //Verifica que el email coincida
+        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
+
+    }
+
+    public boolean isTokenExpired(String token) {
+        return getParser().parseClaimsJws(token).getBody().getExpiration().before(new Date());
     }
 }

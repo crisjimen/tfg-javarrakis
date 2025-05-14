@@ -1,13 +1,23 @@
 package com.crisjimen.javarrakis.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Clase que define los datos de un usuario registrado en el sistema.
+ * Implementa UserDetails para la integración con Spring Security y la
+ * gestión de los permisos de acceso a los recursos del sistema y la
+ * autenticación de los usuarios.
+ */
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
     @Id
     @Column(name = "uid", nullable = false)
     private Long id;
@@ -44,10 +54,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public void setUsername(String username) {
@@ -110,4 +116,39 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    //Métodos de UserDetails
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

@@ -1,11 +1,10 @@
 package com.crisjimen.javarrakis.service;
 
 import com.crisjimen.javarrakis.dto.AuthDTO;
+import com.crisjimen.javarrakis.dto.ChangePasswordDto;
 import com.crisjimen.javarrakis.dto.UserDto;
 import com.crisjimen.javarrakis.dto.UserResponseDTO;
 import com.crisjimen.javarrakis.exception.GlobalException;
-import com.crisjimen.javarrakis.model.Avatar;
-import com.crisjimen.javarrakis.model.ReputationLevel;
 import com.crisjimen.javarrakis.model.User;
 import com.crisjimen.javarrakis.repository.AvatarRepository;
 import com.crisjimen.javarrakis.repository.ReputationLeverRepository;
@@ -18,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -110,7 +110,38 @@ public class AuthServiceImpl implements AuthService {
         AuthDTO authDTO = new AuthDTO(token, userResponseDTO);
 
         return ResponseEntity.ok(authDTO);
+    }
 
+    @Override
+    public void changePassword(String email, ChangePasswordDto changePasswordDto) {
 
+        //Buscar el usuario por email
+        Optional<User> u = userRepository.findUserByEmail(email);
+        if(u.isEmpty()) {
+            throw new GlobalException("Usuario no encontrado", HttpStatus.NOT_FOUND);
+        }
+        User us = u.get();
+
+        //Verificar que la contraseña actual es la correcta
+        if (!argon2.verify(us.getPasswordHash(), changePasswordDto.getCurrentPassword())){
+            throw new GlobalException("La contraseña actual no es correcta", HttpStatus.UNAUTHORIZED);
+        }
+
+        //Verificar que la contraseña no se ha cambiado en los últimos 30 días
+        Instant lastUpdate = us.getUpdatedAt();
+        if(lastUpdate != null){
+
+            long daysBetween = Duration.between(lastUpdate, Instant.now()).toDays();
+            if(daysBetween < 30){
+                throw new GlobalException("No puedes cambiar la contraseña varias veces en menos de 30 días. Días restantes: " + (30 - daysBetween),
+                        HttpStatus.CONFLICT);
+            }
+        }
+
+        //Hashear la nueva contraseña
+        String hashPassword = argon2.hash(2,65536, 1, changePasswordDto.getNewPassword());
+        us.setPasswordHash(hashPassword);
+        us.setUpdatedAt(Instant.now());
+        userRepository.save(us);
     }
 }
