@@ -11,10 +11,18 @@ import java.util.Objects;
 public class UserProgressId implements Serializable {
     private static final long serialVersionUID = 2292262109049560541L;
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    public Long userId;
 
     @Column(name = "level_id", nullable = false)
-    private Long levelId;
+    public Long levelId;
+
+    public UserProgressId(Long userId, Long levelId) {
+        this.userId = userId;
+        this.levelId = levelId;
+    }
+
+    public UserProgressId() {
+    }
 
     public Long getUserId() {
         return userId;

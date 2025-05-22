@@ -14,13 +14,13 @@ public class UserProgress {
     private UserProgressId id;
 
     @MapsId("userId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @MapsId("levelId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
@@ -34,6 +34,20 @@ public class UserProgress {
 
     @Column(name = "completed_at")
     private Instant completedAt;
+
+    //Constructorres
+
+    public UserProgress() {
+    }
+
+    public UserProgress(User user, Level level, Integer score, Boolean completed, Instant completedAt) {
+        this.user = user;
+        this.level = level;
+        this.id = new UserProgressId(user.getId(), level.getId());
+        this.score = score;
+        this.completed = completed;
+        this.completedAt = completedAt;
+    }
 
     public UserProgressId getId() {
         return id;

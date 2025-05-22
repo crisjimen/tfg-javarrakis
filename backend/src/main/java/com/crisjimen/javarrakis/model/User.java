@@ -32,10 +32,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "reputation_id")
     private ReputationLevel reputation;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "avatar_id")
-    private Avatar avatar;
-
     @Column(name = "points", columnDefinition = "int default 0" )
     private Integer points;
 
@@ -74,14 +70,6 @@ public class User implements UserDetails {
 
     public void setReputation(ReputationLevel reputation) {
         this.reputation = reputation;
-    }
-
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
     }
 
     public Integer getPoints() {

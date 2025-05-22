@@ -13,7 +13,6 @@ public class UserResponseDTO implements Serializable {
     private final String username;
     private final String email;
     private final String reputationName;
-    private final String avatarImagePath;
     private final Integer points;
 
     public UserResponseDTO(User u) {
@@ -21,7 +20,6 @@ public class UserResponseDTO implements Serializable {
         this.username = u.getUsername();
         this.email = u.getEmail();
         this.reputationName = u.getReputation().getName();
-        this.avatarImagePath = u.getAvatar().getImagePath();
         this.points = u.getPoints();
     }
 
@@ -39,10 +37,6 @@ public class UserResponseDTO implements Serializable {
 
     public String getReputationName() {
         return reputationName;
-    }
-
-    public String getAvatarImagePath() {
-        return avatarImagePath;
     }
 
     public Integer getPoints() {

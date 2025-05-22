@@ -6,7 +6,6 @@ import com.crisjimen.javarrakis.dto.UserDto;
 import com.crisjimen.javarrakis.dto.UserResponseDTO;
 import com.crisjimen.javarrakis.exception.GlobalException;
 import com.crisjimen.javarrakis.model.User;
-import com.crisjimen.javarrakis.repository.AvatarRepository;
 import com.crisjimen.javarrakis.repository.ReputationLeverRepository;
 import com.crisjimen.javarrakis.repository.UserRepository;
 import com.crisjimen.javarrakis.utils.JWTUtil;
@@ -27,9 +26,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    AvatarRepository avatarRepository;
 
     @Autowired
     ReputationLeverRepository reputationLeverRepository;
@@ -59,7 +55,6 @@ public class AuthServiceImpl implements AuthService {
         newUser.setUsername(user.getUsername());
         newUser.setPoints(0);
         newUser.setRegisteredAt(Instant.now());
-        newUser.setAvatar(avatarRepository.findAvatarById(1L));
         newUser.setReputation(reputationLeverRepository.findReputationLevelById(1L));
 
         //Hashear la constraseña

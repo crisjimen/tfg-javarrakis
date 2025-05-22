@@ -3,7 +3,6 @@ package com.crisjimen.javarrakis.dto;
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.crisjimen.javarrakis.model.Avatar}
  * DTO del formato de respuesta al login/registro
  */
 public class AuthDTO implements Serializable {
