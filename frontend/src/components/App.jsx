@@ -1,12 +1,12 @@
+import TestLogin from "./TestLogin"
 
 
 function App() {
 
   return (
     <>
-      <div className="text-4xl text-blue-500 font-bold">
-        Tailwind está funcionando
-      </div>
+      <h1>Pruebas culonas</h1>
+      <TestLogin />
     </>
   )
 }
