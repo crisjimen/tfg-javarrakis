@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
@@ -26,16 +26,19 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
         <Routes>
-
+            {/* Se evalúa si el usuario está autenticado o no para mostrarle las rutas
+                correspondientes */}
             {
                 status === "authenticated" ? 
                 (<Route path='/*' element={<PrivateRoutes />} />) : 
                 (<Route path='/*' element={<PublicRoutes />} />)
             }
 
+            <Route path='*' element={<Navigate to="/login" replace/>} />
+
         </Routes>
     </BrowserRouter>
   )
 }
 
-export default AppRouter
+export default AppRouter;

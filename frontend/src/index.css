@@ -1,2 +1,17 @@
 /*  Se importa desde index.html*/
 @import "tailwindcss";
+
+/* Fuentes */
+@font-face {
+    font-family: 'VCR';
+    src: url('/fonts/VCR_OSD_MONO_1.001.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Upheaval';
+    src: url('/fonts/upheavtt.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
