@@ -1,3 +1,4 @@
+import AppRouter from "../routes/AppRouter"
 import TestLogin from "./TestLogin"
 
 
@@ -5,8 +6,7 @@ function App() {
 
   return (
     <>
-      <h1>Pruebas culonas</h1>
-      <TestLogin />
+      <AppRouter />
     </>
   )
 }
