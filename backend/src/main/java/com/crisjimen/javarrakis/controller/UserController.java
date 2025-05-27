@@ -3,7 +3,6 @@ package com.crisjimen.javarrakis.controller;
 import com.crisjimen.javarrakis.dto.EvaluationResponse;
 import com.crisjimen.javarrakis.dto.LevelSubmissionRequestDto;
 import com.crisjimen.javarrakis.model.Level;
-import com.crisjimen.javarrakis.model.User;
 import com.crisjimen.javarrakis.service.UserService;
 import com.crisjimen.javarrakis.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
+import  api from '../../services/api';
 
 const RegisterForm = () => {
 
@@ -9,9 +11,57 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
+  /* Comprobacion de errores y de carga */
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  //Llamada a la API para registrar el usuario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if(error) return;
+
+    try {
+      setLoading(true);
+
+      const response = await api.post('/auth/register', {
+        username,
+        email,
+        password
+      });
+
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      {/* Redireccionar a la pagina principal */}
+      navigate('/', { replace: true });
+      
+    } catch (error) {
+      setError(error.response.data.message || error.message || 'Error inesperado');
+    } 
+    finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    //Validar que el username no tenga espacios
+    if (username.includes(' ')) {
+      setError('El nombre de usuario no puede contener espacios.');
+    }
+
+    else if (confirmPassword && password !== confirmPassword) {
+      setError('Las contraseñas no coinciden.');
+    }
+
+    else {
+      setError(null);
+    }
+  }, [username, password, confirmPassword]);
 
   return (
     <div className='flex shadow-sm
@@ -31,7 +81,7 @@ const RegisterForm = () => {
         </p>
       </div>
     
-      <form onSubmit={(e) => {e.preventDefault();}}
+      <form onSubmit={handleSubmit}
       className='flex flex-col font-montserrat mt-4 mb-3 mx-5
        gap-4'>
 
@@ -115,6 +165,16 @@ const RegisterForm = () => {
           </div>
         </div>
 
+
+        {/* Mensaje de error */}
+        {error && (
+        <p className='text-xs text-red-800 mt-1 font-bold flex items-center'>
+          <Icon icon="pixel:exclamation-triangle-solid" 
+          className='inline size-4 mr-1' />
+          {error}
+        </p>
+      )}
+
         <div className="flex flex-row items-center gap-1">
           <input type="checkbox" name="terms" 
           id="terms" required
@@ -130,11 +190,19 @@ const RegisterForm = () => {
           </label>
         </div>
         
-
+        {/* Botón de registro */}
         <Button type='submit'
         className='mt-2 bg-spice-500 hover:bg-spice-600 text-white 
         py-5 rounded-pixel pixel-text cursor-pointer'>
-          CREAR CUENTA
+          
+          {loading ? (
+            <svg className="spinner" viewBox='0 0 50 50'>
+              <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
+            </svg>
+          ) : 
+
+          ('CREAR CUENTA')
+          }
         </Button>
       </form>
 
@@ -146,7 +214,7 @@ const RegisterForm = () => {
         <div className="h-0.5 bg-spice-100 w-1/3"></div>
       </div>
       
-
+    {/* Botones de registro con Google y Github */}
       <div className='flex gap-4 self-center'>
         <Button className='mt-2 border-1 hover:border-spice-800 border-sand-100
         cursor-pointer bg-sand-100 text-spice-800 hover:bg-transparent
@@ -166,12 +234,11 @@ const RegisterForm = () => {
       <div className='mt-3 text-center leading-tight text-white
       text-xs'>
         ¿Ya tienes una cuenta?
-        <p>  
-          <a href="/login" 
-          className='text-spice-800 hover:underline font-bold ml-0.5'>
-          Inicia sesión aquí
-          </a>
-        </p>
+          <p className='text-spice-800 hover:underline font-bold 
+          ml-0.5 cursor-pointer'
+          onClick={() => navigate('/auth?view=login')}>  
+            Inicia sesión aquí
+          </p>
         </div>
 
     </div>

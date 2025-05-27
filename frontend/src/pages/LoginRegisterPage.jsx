@@ -1,16 +1,17 @@
 import LoginForm from '../components/auth/LoginForm';
 import RegisterForm from '../components/auth/RegisterForm';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import './auth.css'
-import { AnimatePresence, Motion } from 'framer-motion';
+import { AnimatePresence, motion as Motion } from 'framer-motion';
 
-const LoginRegisterPage = () => {
-
-  const location = useLocation();
-  const isLogin = location.pathname === '/login';
+const LoginRegisterPage = () => { 
   const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const view = searchParams.get('view') || 'login';
+  const isLogin = view === 'login';
 
   return (
     <div className={`wrapper ${isLogin ? 'bg-stars' : 'bg-clouds'}`}>
@@ -66,8 +67,8 @@ const LoginRegisterPage = () => {
 
           </AnimatePresence>
 
-         <div className="justify-center text-center text-amber-50 font-montserrat 
-         mt-10 text cursor-default text-sm">
+         <div className="absolute text-center text-amber-50 font-montserrat 
+         bottom-3 cursor-default text-xs">
           <p>&copy; Javarrakis 2025 | Privacy Policy</p>
           <p className='font-semibold'>Code must flow</p>
          </div>

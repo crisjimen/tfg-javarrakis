@@ -1,22 +1,51 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
+import api from '../../services/api';
 
 const LoginForm = () => {
   
   /* OnChange handles para cambiar el valor y estado de los inputs*/
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  /*Manejar el formulario*/
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    if(error) return;
+
+    try {
+      setLoading(true);
+
+      const response = await api.post('/auth/login', {
+        email,
+        password
+      });
+
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      navigate('/', { replace: true });
+      
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message || error.message || 'Error inesperado');
+    }
+  }
 
   return (
     <div className='flex shadow-sm
     mt-5 flex-col p-4 py-8 pixel-border rounded-pixel border-3 
-    border-dusk-100 justify-center mb-6
-    backdrop-blur-sm bg-dusk-300/45'>
+    border-dusk-100 justify-center mb-1
+    backdrop-blur-sm bg-dusk-300/45 gap-1'>
       
       <div className="flex flex-col text-center">
         <h1 
@@ -30,7 +59,7 @@ const LoginForm = () => {
         </p>
       </div>
     
-      <form onSubmit={(e) => {e.preventDefault();}}
+      <form onSubmit={handleSubmit}
       className='flex flex-col font-montserrat mt-4 mb-3 mx-5
        gap-4'>
         
@@ -89,11 +118,27 @@ const LoginForm = () => {
             </a>
         </div>
         
+        {/* Mensaje de error*/}
+        {error && (
+          <p className='text-xs text-indigo-800 mt-1 font-bold flex items-center'>
+            <Icon icon="pixel:exclamation-triangle-solid" 
+            className='inline size-4 mr-1' />
+            {error}
+          </p>
+        )}
 
         <Button type='submit'
         className='mt-2 bg-dusk-500 hover:bg-dusk-600 text-white 
         py-5 rounded-pixel pixel-text cursor-pointer'>
-          ENTRAR
+
+          {loading ? (
+            <svg className="spinner" viewBox='0 0 50 50'>
+              <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
+            </svg>
+          ) : 
+          ('ENTRAR')
+
+          }
         </Button>
       </form>
 
@@ -105,7 +150,6 @@ const LoginForm = () => {
         <div className="h-0.5 bg-dusk-100 w-1/3"></div>
       </div>
       
-
       <div className='flex gap-4 self-center'>
         <Button className='mt-2 border-1 hover:border-dusk-800 border-indigo-100
         cursor-pointer bg-indigo-100 text-dusk-800 hover:bg-transparent
@@ -125,11 +169,10 @@ const LoginForm = () => {
       <div className='mt-3 text-center leading-tight text-white
       text-xs'>
         ¿Aún no tienes una cuenta?
-        <p>  
-          <a href="/register" 
-          className='text-dusk-800 hover:underline font-bold ml-0.5'>
+        <p className='text-dusk-800 hover:underline font-bold ml-0.5
+        cursor-pointer'
+        onClick={() => navigate('/auth?view=register')}>  
           Regístrate aquí
-          </a>
         </p>
         </div>
 

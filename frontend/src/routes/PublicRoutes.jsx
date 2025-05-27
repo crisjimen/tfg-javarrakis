@@ -9,9 +9,8 @@ const PublicRoutes = () => {
   return (
     <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="login" element={<LoginRegisterPage />} />
-        <Route path="register" element={<LoginRegisterPage />} />
-        <Route path='*' element={<Navigate to="/login" replace />} />
+        <Route path="auth" element={<LoginRegisterPage />} />
+        <Route path='*' element={<Navigate to="/auth" replace />} />
     </Routes>
   )
 }
