@@ -1,0 +1,121 @@
+/* Backgrounds*/
+.bg-stars {
+  background: linear-gradient(
+  to top,
+  #1a102d 0%,     /* púrpura muy oscuro */
+  #301446 30%,    /* violeta profundo */
+  #4b1d63 60%,    /* morado intenso */
+  #854f98 100%    /* lavanda oscura */
+);
+}
+
+.bg-clouds {
+  background: linear-gradient(
+  to top,
+  #6e2e20 0%,     /* rojo arcilla oscuro */
+  #b14426 25%,    /* rojo-naranja intenso */
+  #e45a2a 50%,    /* naranja quemado */
+  #f88e4b 75%,    /* naranja suave tipo melocotón */
+  #ffd5a2 100%    /* beige cálido con luz */
+);
+
+}
+
+/* Transitions*/
+.fade-slide-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s ease;
+}
+.fade-slide-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-slide-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+.bg-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-repeat: repeat;
+    background-size: auto;
+    animation: float-up 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-layer::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: inherit; /* hereda la textura */
+  background-repeat: repeat;
+  background-size: 64px 64px;
+  opacity: 0.5;
+  z-index: 0;
+  animation: float-up 30s linear infinite;
+}
+
+
+.bg-layer.clouds::before{
+  background-image: url("../assets/img/auth/cloud.png");
+  background-size: 64px 64px;
+  opacity: 0.3;
+}
+
+.bg-layer.stars::before{
+  background-image: url("../assets/img/auth/star.png");
+  background-size: 64px 64px;
+  opacity: 0.3;
+}
+
+@keyframes float-up {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -1000px;
+  }
+}
+
+.content {
+    z-index: 10;
+    position: relative;
+    animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

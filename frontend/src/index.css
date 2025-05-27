@@ -1,10 +1,22 @@
 /*  Se importa desde index.html*/
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tw-animate-css";
 @import "tailwindcss";
+
+.pixel-text {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
 
 /* Fuentes */
 @font-face {
     font-family: 'VCR';
-    src: url('/fonts/VCR_OSD_MONO_1.001.ttf') format('truetype');
+    src: url('/fonts/upheavtt.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -14,4 +26,77 @@
     src: url('/fonts/upheavtt.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+/*  ---break---*/
+
+@theme {
+
+    /* 🌶️ spice */
+  --color-spice-100: oklch(0.936 0.1127 71.38);
+  --color-spice-200: oklch(0.894 0.1257 69.14);
+  --color-spice-300: oklch(0.848 0.1382 65.33);
+  --color-spice-400: oklch(0.793 0.1515 60.67);
+  --color-spice-500: oklch(0.738 0.1636 55.39);
+  --color-spice-600: oklch(0.673 0.1764 49.26);
+  --color-spice-700: oklch(0.597 0.1887 42.05);
+  --color-spice-800: oklch(0.515 0.1957 34.57);
+  --color-spice-900: oklch(0.452 0.1926 30.4);
+
+  /* 🏜️ sand */
+  --color-sand-100: oklch(0.979 0.0437 101.52);
+  --color-sand-200: oklch(0.958 0.062 101.52);
+  --color-sand-300: oklch(0.937 0.078 101.52);
+  --color-sand-400: oklch(0.915 0.0938 101.52);
+  --color-sand-500: oklch(0.89 0.1086 101.52);
+  --color-sand-600: oklch(0.864 0.123 101.52);
+  --color-sand-700: oklch(0.791 0.136 101.52);
+  --color-sand-800: oklch(0.71 0.1478 101.52);
+  --color-sand-900: oklch(0.623 0.157 101.52);
+
+  /* 🌌 dusk */
+  --color-dusk-100: oklch(0.809 0.0561 314.5);
+  --color-dusk-200: oklch(0.731 0.093 311.27);
+  --color-dusk-300: oklch(0.654 0.126 308.04);
+  --color-dusk-400: oklch(0.576 0.156 304.81);
+  --color-dusk-500: oklch(0.5 0.18 301.58);
+  --color-dusk-600: oklch(0.418 0.195 298.35);
+  --color-dusk-700: oklch(0.339 0.202 295.12);
+  --color-dusk-800: oklch(0.262 0.2 291.89);
+  --color-dusk-900: oklch(0.194 0.191 288.66);
+
+  /* Fonts */
+    --font-vcr: 'VCR', sans-serif;
+    --font-upheaval: 'Upheaval', sans-serif;
+
+    --radius-pixel: 0.125rem; /* 2px */
+    --drop-shadow-pixel: 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+@layer base{
+    .pixel-art {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+@keyframes float {
+    0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pixel-border {
+  border: 3px solid #000; 
+  image-rendering: pixelated;
+  box-shadow: 
+    0 0 0 1px #fff,       
+    2px 2px 0 0 #000;     
 }
