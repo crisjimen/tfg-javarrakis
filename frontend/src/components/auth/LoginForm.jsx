@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
-import api from '../../services/api';
+import { useAuth } from '@/context/AuthContext';
 
 const LoginForm = () => {
   
@@ -16,6 +16,9 @@ const LoginForm = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  //Se trae el contexto
+  const {login} = useAuth();
+
   /*Manejar el formulario*/
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -24,20 +27,16 @@ const LoginForm = () => {
 
     try {
       setLoading(true);
-
-      const response = await api.post('/auth/login', {
-        email,
-        password
-      });
-
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      await login(email, password);
 
       navigate('/', { replace: true });
+      window.location.reload();
       
     } catch (error) {
-      setLoading(false);
       setError(error.response.data.message || error.message || 'Error inesperado');
+    }
+    finally {
+      setLoading(false);
     }
   }
 

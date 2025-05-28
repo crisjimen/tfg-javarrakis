@@ -13,7 +13,7 @@ const Personal = ({user}) => {
         <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
         bg-sand-100/50 text-spice-500">
 
-            <Icon icon="pixel:trophy-solid" className="text-2xl" />
+            <Icon icon="pixel:trophy-solid" className="text-2xl text-spice-900" />
             <p className="pixel-text text-[10px] text-center">
                 Nivel de reputación
             </p>
@@ -24,7 +24,7 @@ const Personal = ({user}) => {
         <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
         bg-sand-100/50 text-spice-500">
 
-            <Icon icon="pixel:star-solid" className="text-2xl" />
+            <Icon icon="pixel:star-solid" className="text-2xl  text-spice-900" />
             <p className="pixel-text text-[10px]">
                 Puntos
             </p>
@@ -35,11 +35,13 @@ const Personal = ({user}) => {
         <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
         bg-sand-100/50 text-spice-500">
 
-            <Icon icon="pixel:envelope-solid" className="text-2xl" />
-            <p className="pixel-text text-[10px]">
+            <Icon icon="pixel:envelope-solid" className="text-2xl  text-spice-900" />
+            <p className="pixel-text text-[10px]"
+            title={user?.email}>
                 Email
             </p>
-            <p className='text-xs text-black'>{user?.email}</p>
+            <p className='text-xs text-black
+            max-w-[80%] truncate'>{user?.email}</p>
 
         </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
-import  api from '../../services/api';
+import { useAuth } from '@/context/AuthContext';
 
 const RegisterForm = () => {
 
@@ -19,6 +19,9 @@ const RegisterForm = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  //Se trae el contexto
+  const {register} = useAuth();
+
   //Llamada a la API para registrar el usuario
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,18 +30,11 @@ const RegisterForm = () => {
 
     try {
       setLoading(true);
-
-      const response = await api.post('/auth/register', {
-        username,
-        email,
-        password
-      });
-
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      await register(username, email, password);
 
       {/* Redireccionar a la pagina principal */}
       navigate('/', { replace: true });
+      window.location.reload();
       
     } catch (error) {
       setError(error.response.data.message || error.message || 'Error inesperado');

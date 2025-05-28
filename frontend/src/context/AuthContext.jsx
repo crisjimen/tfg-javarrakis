@@ -40,12 +40,15 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         
         try {
-            const data = await api.post("/auth/login", {email, password});
-
+            const res = await api.post("/auth/login", {email, password});
+            const data = res.data;
             setToken(data.token);
             setUser(data.user);
+            return data;
+            
         } catch (error) {
             console.log(error);
+            throw error;
         }
     }
 
@@ -54,13 +57,14 @@ export const AuthProvider = ({ children }) => {
         
         try {
             const res = await api.post("/auth/register", {username, email, password});
-
-            const data = await res.json();
+            const data = res.data;
             setToken(data.token);
             setUser(data.user);
+            return data;
 
         } catch (error) {
             console.log(error);
+            throw error;
         }
     }
 
@@ -71,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{token, user, login, logout, register}}>
+        <AuthContext.Provider value={{token, user, login, logout, register, setUser}}>
             {children}
         </AuthContext.Provider>
     );

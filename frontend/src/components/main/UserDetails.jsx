@@ -37,7 +37,7 @@ const UserDetails = ({user, onClose}) => {
 
     {/* Pestañas */}
     <div className="absolute flex z-0
-    top-[-38px] left-1/3 -translate-x-1/2
+    top-[-46px] left-1/3 -translate-x-1/2
     md:top-auto md:bottom-[-5px] md:right-[-65px] 
     md:left-auto md:flex-col md:translate-x-0">
 
@@ -78,7 +78,9 @@ const UserDetails = ({user, onClose}) => {
 
         <p className="text-xs sm:text-sm md:text-base font-bold
          w-full max-w-[200px] truncate text-dusk-900">{user.username}</p>
-        <p className="text-sm text-sand-300 mb-4 max-w-[100px] truncate">
+        <p title={user.id} 
+        className="text-sm text-sand-300 mb-4 
+        max-w-[100px] truncate cursor-default">
             UID: {user.id}
         </p>
         
