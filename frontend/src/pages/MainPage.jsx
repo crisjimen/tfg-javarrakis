@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import './auth.css'
 import { motion as Motion, AnimatePresence } from "framer-motion"
+import LevelSelector from "@/components/LevelSelector"
 
 const MainPage = () => {
 
@@ -45,26 +46,27 @@ const MainPage = () => {
       
 
       <AnimatePresence>
-      {showModal && (
-        <Motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center
-          bg-white/10 backdrop-blur-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
+        {showModal && (
           <Motion.div
-            initial={{ scale: 0.8, opacity: 0, y: 50 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.8, opacity: 0, y: 50 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            className="fixed inset-0 z-50 flex items-center justify-center
+            bg-white/10 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <UserDetails user={user} onClose={() => setShowModal(false)} />
+            <Motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            >
+              <UserDetails user={user} onClose={() => setShowModal(false)} />
+            </Motion.div>
           </Motion.div>
-        </Motion.div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
 
+      <LevelSelector />
       
     </div>
   )

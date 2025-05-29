@@ -95,7 +95,7 @@ const Settings = () => {
 
                 
                 <Button type="submit"
-                className="md:w-2/4 bg-spice-400 text-sand-100
+                className="md:w-2/4 bg-spice-500 text-sand-100
                 pixel-text md:text-xs text-[12px] cursor-pointer mt-2
                 hover:scale-105 hover:shadow-sm">
 

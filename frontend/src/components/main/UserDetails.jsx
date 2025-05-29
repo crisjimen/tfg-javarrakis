@@ -22,7 +22,7 @@ const UserDetails = ({user, onClose}) => {
 
     return (
 
-    <div className="flex flex-col md:flex-row bg-spice-200/40
+    <div className="flex flex-col md:flex-row bg-[#ffb152]/70
     border-5 border-sand-100 p-4 w-[90%] max-w-5xl mx-auto 
     shadow-sm mt-[5%] relative shadow-[#662d20]">
       
