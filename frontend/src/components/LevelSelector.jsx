@@ -13,16 +13,15 @@ const LevelSelector = () => {
         const config = {
             type: Phaser.AUTO,
             width: '100%',
-            height: 500,
+            height: 520,
             scene: [LevelSelectScene],
             parent: gameRef.current,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    debug: false
-                }
-            },
+            pixelart: true,
+            antialias: false,
             backgroundColor: '#ffffff',
+            dom: {
+                createContainer: true
+            }
         };
 
         phaserInstance.current = new Phaser.Game(config);
@@ -40,14 +39,12 @@ const LevelSelector = () => {
     ref={gameRef}
     id='phaser-level-selector'
     style={{
-        width: '90%',
-        height: '500px',
-        margin: '30px auto 0 auto',
-        border: '4px solid pink',
-        borderRadius: '12px',
+        width: '80%',
+        margin: '25px auto 0 auto',
         overflow: 'hidden',
         imageRendering: 'pixelated'
-        }} />
+        }} 
+    className='border-sand-200 pixel-border border-3'/>
   )
 }
 

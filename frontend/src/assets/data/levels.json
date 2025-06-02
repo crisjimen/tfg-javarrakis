@@ -7,7 +7,7 @@
     "salidaEsperada": "Arrakis es un mundo desértico",
     "dificultad":1,
     "points": 10,
-    "objetivo": "Hacer uso de println()",
+    "objetivo": "Uso de println()",
     "x":100,
     "y":200
   },
@@ -19,7 +19,7 @@
     "salidaEsperada": "Mensaje recibido con éxito",
     "dificultad": 1,
     "points": 15,
-    "objetivo": "Hacer uso de println()",
+    "objetivo": "Uso de println()",
     "x":300,
     "y":200
   },
@@ -31,7 +31,7 @@
     "salidaEsperada": "Cantidad de especia: 42",
     "dificultad": 2,
     "points": 20,
-    "objetivo": "Hacer uso de operadores matemáticos",
+    "objetivo": "Operadores matemáticos",
     "x":500,
     "y":200
   }

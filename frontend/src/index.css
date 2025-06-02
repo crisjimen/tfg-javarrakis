@@ -1,5 +1,4 @@
 /*  Se importa desde index.html*/
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tw-animate-css";
 @import "tailwindcss";
 
@@ -105,3 +104,18 @@
     0 0 0 1px #fff,       
     2px 2px 0 0 #000;     
 }
+
+.button-shadow{
+  image-rendering: pixelated;
+  box-shadow: 
+    0 5px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 3px var(--color-spice-900);
+}
+
+.button-shadow:active{
+  image-rendering: pixelated;
+  box-shadow: 
+    inset 0 3px 0 var(--color-spice-600),
+    0 0 0 3px var(--color-spice-900);
+}
+
