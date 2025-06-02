@@ -36,15 +36,28 @@ public class OpenAiService {
     public String generateFeedback(String userCode, String expected, String actual) {
 
         //Generar el prompt
-        String prompt = String.format("" +
-                "El siguiente fragmento de código se ejecuta correctamente, pero no produce la salida esperada" +
-                "en base al resultado esperado y a los requisitos." +
-                "Codigo: %s" +
-                "Resultado esperado: %s" +
-                "Resultado obtenido: %s" +
-                "NO CORRIJAS EL CODIGO, SOLO UNA RECOMENDACIÓN. NO ENVÍES EL CÓDIGO CORREGIDO." +
-                "Formato de respuesta: 1 frase de recomendación, CORTA Y SIN EL CÓDIGO ENVIADO",
-                userCode, expected, actual);
+        String prompt = String.format(
+                """
+                El siguiente fragmento de código se ejecuta correctamente, pero no produce la salida esperada.
+                Código:
+                %s
+        
+                Resultado esperado:
+                %s
+        
+                Resultado obtenido:
+                %s
+        
+                Objetivo: Proporciona UNA recomendación breve para ayudar al usuario a ajustar su código. 
+                ⚠️ NO corrijas el código.
+                ❌ NO incluyas el código corregido ni fragmentos.
+                ✅ Solo da una frase de sugerencia clara y concisa (máximo 20 palabras). 
+                💬 Usa un tono directo y amigable.
+        
+                Formato de respuesta: una sola línea con una sugerencia clara y útil.
+                """,
+                userCode, expected, actual
+        );
 
         //Construir el cuerpo de la petición
         Map<String, Object> requestBody = new HashMap<>();

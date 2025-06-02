@@ -1,8 +1,12 @@
 package com.crisjimen.javarrakis.dto;
 
 import com.crisjimen.javarrakis.model.User;
+import com.crisjimen.javarrakis.model.UserProgress;
+import com.crisjimen.javarrakis.model.UserProgressId;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * DTO for {@link com.crisjimen.javarrakis.model.User}
@@ -14,6 +18,7 @@ public class UserResponseDTO implements Serializable {
     private final String email;
     private final String reputationName;
     private final Integer points;
+    private final Set<Long> levelsCompleted;
 
     public UserResponseDTO(User u) {
         this.id = u.getId();
@@ -21,6 +26,10 @@ public class UserResponseDTO implements Serializable {
         this.email = u.getEmail();
         this.reputationName = u.getReputation().getName();
         this.points = u.getPoints();
+        this.levelsCompleted = u.getProgress().stream()
+                .filter(UserProgress::getCompleted)
+                .map(p -> p.getId().getLevelId())
+                .collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -42,4 +51,8 @@ public class UserResponseDTO implements Serializable {
     public Integer getPoints() {
         return points;
     }
+
+    public Set<Long> getLevelsCompleted() { return levelsCompleted; }
+
+
 }

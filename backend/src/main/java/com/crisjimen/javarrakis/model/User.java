@@ -44,6 +44,9 @@ public class User implements UserDetails {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserProgress> progress;
+
     public Long getId() {
         return id;
     }
@@ -103,6 +106,10 @@ public class User implements UserDetails {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
+    public List<UserProgress> getProgress() { return progress; }
+
+    public void setProgress(List<UserProgress> progress) { this.progress = progress; }
 
     //Métodos de UserDetails
 

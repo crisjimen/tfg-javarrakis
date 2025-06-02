@@ -18,7 +18,7 @@ export default class LevelSelectScene extends Phaser.Scene {
             frameHeight: 100
         });
         this.load.image('star-bg', '/level/bg-star.png');
-
+        this.load.image('check', '/level/check.png');
         this.load.image('glow', '/level/glow.png');
         this.load.image('pixel--star-solid.png', '/level/pixel--star-solid.png');
         this.load.image('pixel--star.png', '/level/pixel--star.png');
@@ -62,9 +62,6 @@ export default class LevelSelectScene extends Phaser.Scene {
                 delay: Phaser.Math.Between(0, 1500)
             });
         }
-
-       
-
         this.textures.get('background').setFilter(Phaser.Textures.FilterMode.NEAREST);
         this.textures.get('levelNode').setFilter(Phaser.Textures.FilterMode.NEAREST);
         this.textures.get('player').setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -93,7 +90,12 @@ export default class LevelSelectScene extends Phaser.Scene {
 
         // Usuario (si existe en contexto global)
         const storedUser = localStorage.getItem('user');
-        const username = storedUser ? JSON.parse(storedUser).username : 'Jugador';
+        const user = storedUser ? JSON.parse(storedUser) : {};
+        const username = user?.username || 'Jugador';
+        const completedLevels = Array.isArray(user?.levelsCompleted) ? user.levelsCompleted : [];
+
+        console.log(completedLevels);
+        console.log(levelsData.map(level => level.id));
 
         // Crear nodos
         this.levelNodes = levelsData.map((level, i) => {
@@ -102,6 +104,16 @@ export default class LevelSelectScene extends Phaser.Scene {
             const node = this.add.image(x, yPos, "levelNode")
                 .setInteractive()
                 .setScale(0.1);
+
+            //Ver si se ha completado o no
+            if (completedLevels.includes(level.id)) {
+                const checkmark = this.add.image(x -30, yPos +18, 'check')
+                .setScale(0.3)
+                .setDepth(2)
+                .setTint(0x239b56);
+
+                node.checkmark = checkmark;
+            }
 
             // Mostrar 3 estrellas, rellenando según dificultad
             const dificultad = level.dificultad || 1;
@@ -175,6 +187,18 @@ export default class LevelSelectScene extends Phaser.Scene {
             startButton.addEventListener('click', () => {
             window.location.href = `/level?id=${level.id}`;
             });
+
+            const isFirstLevel = i === 0;
+            const prevLevelId = levelsData[i - 1]?.id;
+            const isUnlocked = isFirstLevel || completedLevels.includes(prevLevelId);
+
+            // Desactivar botón si el nivel está bloqueado
+            if (!isUnlocked) {
+                node.setTint(0x444444); // gris oscuro
+                startButton.disabled = true;
+                startButton.style.pointerEvents = 'none';
+                startButton.innerText = "Bloqueado 🔒";
+            }
 
             return { ...level, x, y: yPos, node, card, difficultyStars: stars, startButton: startButtonDom };
         });
