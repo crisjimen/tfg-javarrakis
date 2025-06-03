@@ -1,6 +1,6 @@
 # 🌌 Javarrakis: Aprende Java en el desierto
 
-** JAVARRAKIS ** es una plataforma educativa, con dinámicas de videojuegos, ambientada en la novela de ciencia ficción *Dune*, con estilo visual retro. El jugador se adentra en la historia mientras resuelve retos de programación en **Java**. Ideal para estudiantes y aprendices.
+**JAVARRAKIS** es una plataforma educativa, con dinámicas de videojuegos, ambientada en la novela de ciencia ficción *Dune*, con estilo visual retro. El jugador se adentra en la historia mientras resuelve retos de programación en **Java**. Ideal para estudiantes y aprendices.
 
 ## 🌟 Características
 
