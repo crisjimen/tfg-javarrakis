@@ -101,9 +101,19 @@ const LevelPage = () => {
       setOutput("")
 
       try {
+
+        const combinedCode = 
+        `public class Main {
+        ${code}
+
+        ${level.codigoPrueba}
+        }`.trim();
+
+        console.log(combinedCode)
+
         const res = await api.post(`/level/${level.id}/submit`, {
-          userCode: code,
-          expectedOutput: level.salidaEsperada,
+          userCode: combinedCode,
+          expectedOutput: level.salidaInterfaz,
           points: level.points,
         });
 
@@ -262,6 +272,21 @@ const LevelPage = () => {
                 {level.descripcionDetallada}</p>
             </div>
 
+            {level.datosInterfaz && (
+              <div className="mb-4">
+              <h2 className="text-sm text-spice-300 mb-1 pixel-text
+              flex items-center gap-4">
+              <Icon icon="pixel:folder-open-solid" className="text-xl" />
+              Datos proporcionados
+              </h2>
+
+              <pre className="bg-[#26151a] text-spice-100 p-2 
+              rounded text-sm whitespace-pre-wrap font-mono">
+                {level.datosInterfaz}
+              </pre>
+            </div>
+            )}
+
             <div>
               <h2 className="text-sm text-spice-300 mb-1 pixel-text
               flex items-center gap-4">
@@ -271,7 +296,7 @@ const LevelPage = () => {
 
               <pre className="bg-[#26151a] text-spice-100 p-2 
               rounded text-sm whitespace-pre-wrap font-mono">
-                {level.salidaEsperada}
+                {level.salidaInterfaz}
               </pre>
             </div>
 

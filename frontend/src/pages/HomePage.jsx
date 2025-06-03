@@ -87,7 +87,7 @@ export default function HomePage() {
               drop-shadow-[3px_3px_0px_#261513]" 
               onClick={() => {
                 setMenuOpen(false);
-                navigate('/auth?view=login');
+                navigate('/auth?view=register');
               }}>Registrarse</a>
 
           </div>

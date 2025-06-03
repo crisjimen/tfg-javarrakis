@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class User implements UserDetails {
     private String passwordHash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserProgress> progress;
+    private List<UserProgress> progress = new ArrayList<>();
 
     public Long getId() {
         return id;

@@ -26,7 +26,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(error) return;
+    if (error) return;
 
     try {
       setLoading(true);
@@ -48,15 +48,26 @@ const RegisterForm = () => {
     //Validar que el username no tenga espacios
     if (username.includes(' ')) {
       setError('El nombre de usuario no puede contener espacios.');
+      return;
     }
 
-    else if (confirmPassword && password !== confirmPassword) {
+    //Validar que la contraseña sea segura
+    // 8 caracteres, 1 mayuscula, 1 minuscula y un numero
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.');
+      return;
+    }
+
+    // Validar que las contraseñas coinciden
+    if (confirmPassword && password !== confirmPassword) {
       setError('Las contraseñas no coinciden.');
+      return;
     }
 
-    else {
-      setError(null);
-    }
+    setError(null);
+    
   }, [username, password, confirmPassword]);
 
   return (
@@ -164,7 +175,8 @@ const RegisterForm = () => {
 
         {/* Mensaje de error */}
         {error && (
-        <p className='text-xs text-red-800 mt-1 font-bold flex items-center'>
+        <p className='text-xs text-red-800 mt-1 font-bold 
+        inline-flex items-center max-w-xs break-words'>
           <Icon icon="pixel:exclamation-triangle-solid" 
           className='inline size-4 mr-1' />
           {error}

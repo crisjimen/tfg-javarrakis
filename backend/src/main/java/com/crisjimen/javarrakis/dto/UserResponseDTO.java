@@ -5,6 +5,7 @@ import com.crisjimen.javarrakis.model.UserProgress;
 import com.crisjimen.javarrakis.model.UserProgressId;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,10 +27,11 @@ public class UserResponseDTO implements Serializable {
         this.email = u.getEmail();
         this.reputationName = u.getReputation().getName();
         this.points = u.getPoints();
-        this.levelsCompleted = u.getProgress().stream()
+        this.levelsCompleted = u.getProgress() != null ?
+                u.getProgress().stream()
                 .filter(UserProgress::getCompleted)
                 .map(p -> p.getId().getLevelId())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()) : new HashSet<>();
     }
 
     public Long getId() {

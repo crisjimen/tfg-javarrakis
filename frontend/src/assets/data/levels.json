@@ -1,38 +1,45 @@
 [
   {
     "id": 1,
-    "nombre": "Prueba de Arraki",
-    "descripcionDetallada": "En este nivel deberás crear un programa que imprima un mensaje que demuestre tu conocimiento sobre Arrakis, el planeta desértico. El código debe incluir un método main que imprima exactamente: 'Arrakis es un mundo cubierto por un desierto'.",
-    "codigoInicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código aquí\n  }\n}",
-    "salidaEsperada": "Arrakis es un mundo cubierto por un desierto",
-    "dificultad":1,
+    "nombre": "Mensaje de Shai-Hulud",
+    "descripcionDetallada": "Shai-Hulud, el gran gusano de arena, ha despertado. Crea un método llamado `invocarGusano` que retorne la frase exacta: 'Shai-Hulud ha sido invocado'. Define en el método lo que debe retornar a través de return",
+    "codigoInicial": "public static String invocarGusano() {\n    // Tu código aquí\n}",
+    "salidaInterfaz": "Shai-Hulud ha sido invocado",
+    "codigoPrueba":  "public static void main(String[] args) {\n    String resultado = invocarGusano();\n    if (\"Shai-Hulud ha sido invocado\".equals(resultado)) {\n        System.out.println(resultado);\n    } else {\n        System.out.println(resultado);\n    }\n}",
+    "dificultad": 1,
     "points": 10,
-    "objetivo": "Uso de println()",
-    "x":100,
-    "y":200
+    "objetivo": "Concatenación de cadenas",
+    "x": 100,
+    "y": 200
   },
   {
     "id": 2,
-    "nombre": "El Mensajero Fremen",
-    "descripcionDetallada": "El Mensajero Fremen debe enviar un mensaje secreto. Crea un programa Java que imprima la frase exacta: 'Mensaje recibido con éxito'. Usa el método main como punto de entrada.",
-    "codigoInicial": "public class Main {\n  public static void main(String[] args) {\n    // Escribe tu mensaje secreto aquí\n  }\n}",
-    "salidaEsperada": "Mensaje recibido correctamente",
-    "dificultad": 1,
+    "nombre": "Las Arenas del Tiempo",
+    "descripcionDetallada": "Un maestro Fremen calcula cuántos años han pasado desde la última tormenta. Crea un método `calcularAnios` que reciba dos enteros (año actual y año pasado) y devuelva la diferencia. Define en el método lo que debe retornar a través de return",
+    "codigoInicial": "public static int calcularAnios(int actual, int pasado) {\n    // Tu código aquí\n}",
+    "salidaInterfaz": "15",
+    "datosInterfaz": "Actual: 2025\nPasado: 2010",
+    "codigoPrueba": "public static void main(String[] args) {\n        int resultado = calcularAnios(2025, 2010);\n        if (resultado == 15) {\n            System.out.println(resultado);\n        } else {\n            System.out.println(resultado);\n        }\n    }",
+    "dificultad": 2,
     "points": 15,
-    "objetivo": "Uso de println()",
-    "x":300,
-    "y":200
+    "objetivo": "Métodos con parámetros y operaciones aritméticas",
+    "x": 300,
+    "y": 200
   },
   {
-    "id": 3,
-    "nombre": "El Control de la Especia",
-    "descripcionDetallada": "Para asegurar un viaje seguro, debes calcular y mostrar la cantidad correcta de especia necesaria. El programa debe imprimir: 'Cantidad de especia: 42'.",
-    "codigoInicial": "public class Main {\n  public static void main(String[] args) {\n    // Calcula y muestra la cantidad de especia\n  }\n}",
-    "salidaEsperada": "Cantidad de especia: 42",
-    "dificultad": 2,
-    "points": 20,
-    "objetivo": "Operadores matemáticos",
-    "x":500,
-    "y":200
-  }
+  "id": 3,
+  "nombre": "Control de Agua",
+  "descripcionDetallada": "En el desierto de Arrakis, el agua vale más que la vida. Implementa un método `aguaPorPersona` que reciba la cantidad total de agua y el número de personas, y devuelva cuánta agua recibe cada persona (como entero). Si el número de personas es 0, retorna -1.",
+  "codigoInicial": "public static int aguaPorPersona(int aguaTotal, int personas) {\n    // Tu código aquí\n}",
+  "salidaInterfaz": "21",
+  "datosInterfaz": "Total de agua: 84\nPersonas: 4",
+  "codigoPrueba": "public static void main(String[] args) {\n        int resultado = aguaPorPersona(84, 4);\n        if (resultado == 21) {\n            System.out.println(resultado);\n        } else {\n            System.out.println(resultado);\n        }\n    }",
+  "dificultad": 2,
+  "points": 20,
+  "objetivo": "Divisiones con validación",
+  "x": 500,
+  "y": 200
+}
+
 ]
+
