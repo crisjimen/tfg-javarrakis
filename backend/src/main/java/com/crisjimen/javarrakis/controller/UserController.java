@@ -2,6 +2,7 @@ package com.crisjimen.javarrakis.controller;
 
 import com.crisjimen.javarrakis.dto.EvaluationResponse;
 import com.crisjimen.javarrakis.dto.LevelSubmissionRequestDto;
+import com.crisjimen.javarrakis.dto.UserHistoryDto;
 import com.crisjimen.javarrakis.dto.UserResponseDTO;
 import com.crisjimen.javarrakis.model.Level;
 import com.crisjimen.javarrakis.model.User;
@@ -63,6 +64,16 @@ public class UserController {
         String email = jwtUtil.getValue(cleanToken);
         Optional<User> u = userRepository.findUserByEmail(email);
         UserResponseDTO dto = new UserResponseDTO(u.get());
+        return ResponseEntity.ok(dto);
+    }
+
+    //Obtener el historial de los niveles completados
+    @GetMapping("/me/history")
+    public ResponseEntity<List<UserHistoryDto>> getCurrentUserHistory(@RequestHeader("Authorization") String token) {
+        String cleanToken = token.replace("Bearer ", "");
+        String email = jwtUtil.getValue(cleanToken);
+        Optional<User> u = userRepository.findUserByEmail(email);
+        List<UserHistoryDto> dto = userService.getUserHistory(u.get());
         return ResponseEntity.ok(dto);
     }
 

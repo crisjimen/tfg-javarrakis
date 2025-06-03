@@ -14,7 +14,7 @@ const LevelPage = () => {
   const [loading, setLoading] = useState(false);
   const [execError, setExecError] = useState(null);
 
-  const { user, refreshUser } = useAuth();
+  const { refreshUser } = useAuth();
 
   const query = new URLSearchParams(useLocation().search)
   const levelId = query.get("id")
@@ -88,7 +88,7 @@ const LevelPage = () => {
   }, [])
 
   if (error) return <div className="text-red-500">{error}</div>
-  if (!level) return <div>Cargando...</div>
+
 
   const handleCodeChange = (e) => {
     setCode(e.target.value)
@@ -125,6 +125,8 @@ const LevelPage = () => {
       className="w-full min-h-screen bg-[url('/src/assets/img/level-bg.png')] 
       text-white font-mono px-8 py-6 bg-cover bg-center"
     >
+      {!level? <div>Cargando...</div> : 
+      <>
       {/* Top bar */}
       <div className="flex items-center justify-between mb-8 mt-3">
         <button
@@ -223,124 +225,133 @@ const LevelPage = () => {
 
           {/* Botón de enviar */}
           <div className="flex mt-6 absolute bottom-3 right-3">
-            <button
-              className="px-6 py-2 bg-spice-600/80 hover:bg-spice-700/80 
-              border-2 border-spice-700 pixel-text text-xs
-              text-[#26151a] font-extrabold rounded
-              cursor-pointer"
-              onClick={ejecutarCodigo}
-              disabled={loading}
-            >
-              {loading ? "Comprobando..." : "Ejecutar"}
-            </button>
+              <button
+                className="px-6 py-2 bg-spice-600/80 hover:bg-spice-700/80 
+                border-2 border-spice-700 pixel-text text-xs
+                text-[#26151a] font-extrabold rounded
+                cursor-pointer"
+                onClick={ejecutarCodigo}
+                disabled={loading}
+              >
+                {loading ? "Comprobando..." : "Ejecutar"}
+              </button>
 
-          </div>
-        </div>
-
-        {/* Panel lateral (objetivo + descripción + salida) */}
-        <div className="w-[420px] flex-shrink-0 bg-[#312028]/80 border border-yellow-700 rounded p-4">
-          <div className="mb-4">
-            <h2 className=" pixel-text text-spice-300 mb-1
-            flex items-center gap-4"
-            >
-            <Icon icon="pixel:trophy-solid" className="text-xl" />
-            Objetivo
-            </h2>
-            
-            <p>{level.objetivo}</p>
-          </div>
-
-          <div className="mb-4">
-            <h2 className="text-sm pixel-text text-spice-300 mb-1 flex 
-            items-center gap-4">
-              <Icon icon="pixel:code-solid" className="text-xl" /> 
-              Descripción
-            </h2>
-            <p className="text-[15px] font-montserrat">
-              {level.descripcionDetallada}</p>
-          </div>
-
-          <div>
-            <h2 className="text-sm text-spice-300 mb-1 pixel-text
-            flex items-center gap-4">
-            <Icon icon="pixel:vote-yeah-solid" className="text-xl" />
-            Salida esperada
-            </h2>
-
-            <pre className="bg-[#26151a] text-spice-100 p-2 
-            rounded text-sm whitespace-pre-wrap font-mono">
-              {level.salidaEsperada}
-            </pre>
-          </div>
-
-          {execError && (
-            <div className="text-red-400 whitespace-pre-wrap mt-4 text-start
-            bg-[#26151a] p-2 rounded">
-              {errorMsg}
-              </div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-6">
-         {execError && (
-            <div className="text-[#26151a] border-2 border-spice-500
-            text-start mt-4 bg-spice-500/70 p-2 rounded flex items-center gap-4">
-
-              <Icon icon="pixel:minds" className="text-2xl text-spice-900" />
-              {recomendacion.split('\n').map((linea, index) => (
-
-                <p key={index} 
-                className={index === 0 ? "font-bold" : ""}
-                >{linea}</p>
-              ))}
-              </div>
-          )}
-
-          {output && (
-          <div className="fixed inset-0 bg-black/80 flex items-center 
-          justify-center z-50">
-            <div className="bg-zinc-900 text-green-400 p-6 
-            rounded-xl shadow-lg max-w-md w-full space-y-4 text-center 
-            border-2 border-green-600 drop-shadow-[0_0_0.3rem_green]">
-
-              <h2 className="text-lg font-bold pixel-text">
-                ✅ ¡Nivel completado!
-                </h2>
-
-              <div>
-                <strong className="block mb-1">
-                  Puntos obtenidos:
-                  </strong>
-
-                <pre className="bg-zinc-950 p-2 rounded text-sm border border-green-700">{output.puntuacion}</pre>
-              </div>
-
-              <div className="flex justify-center gap-4 pt-4">
-                <button
-                  onClick={() => navigate(`/level?id=${level.id + 1}`)} // reemplaza con tu función
-                  className="bg-green-600 hover:bg-green-500
-                   text-black font-bold py-2 px-4 rounded shadow
-                   cursor-pointer"
-                >
-                  Siguiente nivel 🚀
-                </button>
-                <button
-                  onClick={() => navigate("/")} // reemplaza con tu función
-                  className="bg-zinc-800 hover:bg-zinc-700 text-green-300 
-                  border border-green-500 font-bold py-2 px-4 rounded shadow
-                  cursor-pointer"
-                >
-                  Volver al menú 🏠
-                </button>
-              </div>
             </div>
           </div>
-        )}
 
-      </div>
+          {/* Panel lateral (objetivo + descripción + salida) */}
+          <div className="w-[420px] flex-shrink-0 bg-[#312028]/80 border border-yellow-700 rounded p-4">
+            <div className="mb-4">
+              <h2 className=" pixel-text text-spice-300 mb-1
+              flex items-center gap-4"
+              >
+              <Icon icon="pixel:trophy-solid" className="text-xl" />
+              Objetivo
+              </h2>
+              
+              <p>{level.objetivo}</p>
+            </div>
+
+            <div className="mb-4">
+              <h2 className="text-sm pixel-text text-spice-300 mb-1 flex 
+              items-center gap-4">
+                <Icon icon="pixel:code-solid" className="text-xl" /> 
+                Descripción
+              </h2>
+              <p className="text-[15px] font-montserrat">
+                {level.descripcionDetallada}</p>
+            </div>
+
+            <div>
+              <h2 className="text-sm text-spice-300 mb-1 pixel-text
+              flex items-center gap-4">
+              <Icon icon="pixel:vote-yeah-solid" className="text-xl" />
+              Salida esperada
+              </h2>
+
+              <pre className="bg-[#26151a] text-spice-100 p-2 
+              rounded text-sm whitespace-pre-wrap font-mono">
+                {level.salidaEsperada}
+              </pre>
+            </div>
+
+            {execError && (
+              <div className="text-red-400 whitespace-pre-wrap mt-4 text-start
+              bg-[#26151a] p-2 rounded">
+                {errorMsg}
+                </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-6">
+          {execError && (
+              <div className="text-[#26151a] border-2 border-spice-500
+              text-start mt-4 bg-spice-500/70 p-2 rounded flex items-center gap-4">
+
+                <Icon icon="pixel:minds" className="text-2xl text-spice-900" />
+                {recomendacion.split('\n').map((linea, index) => (
+
+                  <p key={index} 
+                  className={index === 0 ? "font-bold" : ""}
+                  >{linea}</p>
+                ))}
+                </div>
+            )}
+
+            {output && (
+            <div className="fixed inset-0 bg-black/80 flex items-center 
+            justify-center z-50">
+              <div className="bg-zinc-900 text-emerald-400 p-6 
+              rounded-xl shadow-lg max-w-md w-full space-y-4 text-center 
+              border-2 border-emerald-600 drop-shadow-[0_0_0.3rem_emerald]">
+
+                <h2 className="text-lg font-bold pixel-text flex items-center gap-2
+                justify-center">
+                  <Icon icon="pixel:trophy-solid" className="text-2xl" /> 
+                  ¡Nivel completado!
+                  </h2>
+
+                <div>
+                  <strong className="block mb-1">
+                    Puntos obtenidos:
+                  </strong>
+
+                  <pre className="bg-zinc-950/80 p-2 rounded text-sm border border-emerald-700">{output.puntuacion}</pre>
+                </div>
+
+                <div className="flex justify-center gap-4 pt-4">
+                  <button
+                    onClick={() => navigate(`/level?id=${level.id + 1}`)} // reemplaza con tu función
+                    className="bg-emerald-600 hover:bg-emerald-500
+                    text-black font-bold py-2 px-4 rounded shadow
+                    cursor-pointer flex items-center gap-2"
+                  >
+                    <Icon icon="pixel:plane-departure-solid" className="text-xl" />
+                    Siguiente nivel
+                  </button>
+                  <button
+                    onClick={() => navigate("/")} // reemplaza con tu función
+                    className="bg-zinc-800 hover:bg-zinc-700 text-emerald-300 
+                    border border-emerald-500 font-bold py-2 px-4 rounded shadow
+                    cursor-pointer flex gap-2"
+                  >
+                    Volver al menú
+                    <Icon icon="pixel:home-solid" className="text-xl" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </>
+      }
+
+      
 
     </div>
+      
   )
 }
 

@@ -137,3 +137,34 @@
   scrollbar-width: thin;
   scrollbar-color: var(--color-spice-600) #2c2c2c;
 }
+
+html{
+  scroll-behavior: smooth;
+}
+
+/* Scroll de la landing page*/
+html::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: var(--color-spice-500);
+  border-radius: 4px;
+  border: 2px solid #312028;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-spice-500);
+}
+
+  html {
+  scrollbar-width:thin;
+  scrollbar-color: var(--color-spice-800) #312028;
+}
+

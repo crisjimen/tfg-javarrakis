@@ -87,8 +87,20 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    // Obtener el historial del usuario
+    const getHistory = async () => {
+        try {
+            const res = await api.get("/me/history");
+            const data = res.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{token, user, login, logout, register, setUser, refreshUser}}>
+        <AuthContext.Provider value={{token, user, login, logout, register, setUser, refreshUser, getHistory}}>
             {children}
         </AuthContext.Provider>
     );

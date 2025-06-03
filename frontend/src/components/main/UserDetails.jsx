@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { Icon } from '@iconify/react';
 import Personal from './tabs/Personal';
 import Settings from './tabs/Settings';
+import History from './tabs/History';
 
 const UserDetails = ({user, onClose}) => {
 
@@ -15,6 +16,8 @@ const UserDetails = ({user, onClose}) => {
                 return <Personal user={user} />;
             case 'settings':
                 return <Settings />;
+            case 'history':
+                return <History />;
             default:
                 return null;
         }
@@ -48,6 +51,16 @@ const UserDetails = ({user, onClose}) => {
         
         ${activeTab === 'personal' ? 'bg-sand-100' : 'bg-spice-200/40'}`}>
             <Icon icon="pixel:user-solid" 
+            className="text-xl text-spice-900" />
+        </button>
+
+        <button onClick={() => setActiveTab('history')}
+        className={`cursor-pointer  py-2 px-5
+        border-5 border-sand-100 sm:border-r-0 md:border-r-5
+        md:border-l-0
+        
+        ${activeTab === 'history' ? 'bg-sand-100' : 'bg-spice-200/40'}`}>
+            <Icon icon="pixel:bookmark-solid" 
             className="text-xl text-spice-900" />
         </button>
 

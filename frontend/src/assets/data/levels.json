@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "nombre": "Prueba del Arrakis",
+    "nombre": "Prueba de Arraki",
     "descripcionDetallada": "En este nivel deberás crear un programa que imprima un mensaje que demuestre tu conocimiento sobre Arrakis, el planeta desértico. El código debe incluir un método main que imprima exactamente: 'Arrakis es un mundo cubierto por un desierto'.",
     "codigoInicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código aquí\n  }\n}",
     "salidaEsperada": "Arrakis es un mundo cubierto por un desierto",
