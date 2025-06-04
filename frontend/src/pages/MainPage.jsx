@@ -16,34 +16,35 @@ const MainPage = () => {
   }, [])
 
   return (
-    <div className="flex flex-col bg-clouds h-screen font-montserrat">
+    <div className="flex flex-col bg-clouds h-screen font-montserrat overflow-y-auto">
 
-      <div
-      className="flex align-center justify-between items-center p-4
-      ">
+      <div className="flex flex-wrap sm:flex-nowrap items-center justify-between p-4 gap-2">
+
         <Button
-        onClick={() => setShowModal(true)}
-        className="flex items-center gap-2 cursor-pointer px-4 py-5
-        bg-sand-100/50 font-montserrat text-spice-900
-        hover:scale-105 text-xs hover:bg-transparent hover:backdrop-blur-lg
-        border-1 border-sand-100/70 hover:border-sand-100">
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 cursor-pointer px-3 py-2
+          bg-sand-100/50 font-montserrat text-spice-900 text-xs sm:text-sm
+          hover:scale-105 hover:bg-transparent hover:backdrop-blur-lg
+          border border-sand-100/70 hover:border-sand-100"
+        >
           Hola, <b>{user?.username}</b>
         </Button>
 
-        <div>
-          <img src="src/assets/img/JavarrakisTypo.png" 
-          alt="Logo"
-          className="cursor-pointer hover:scale-105 transition-all"/>
+        <div className="flex-shrink-0">
+          <img
+            src="src/assets/img/JavarrakisTypo.png"
+            alt="Logo"
+            className="cursor-pointer hover:scale-105 transition-all max-w-[120px] sm:max-w-[180px] w-full h-auto"
+          />
         </div>
 
-        <div className="flex gap-4 items-center mr-4 pixel-text
-        text-xs">
-          <p>{user?.reputationName}</p> - 
+        <div className="flex flex-col sm:flex-row gap-1 sm:gap-4 items-start sm:items-center pixel-text text-xs sm:text-sm mr-4">
+          <p>{user?.reputationName}</p>
+          <p>-</p>
           <p>{user?.points}</p>
         </div>
 
       </div>
-      
 
       <AnimatePresence>
         {showModal && (
@@ -67,7 +68,7 @@ const MainPage = () => {
       </AnimatePresence>
 
       <LevelSelector />
-      
+
     </div>
   )
 }

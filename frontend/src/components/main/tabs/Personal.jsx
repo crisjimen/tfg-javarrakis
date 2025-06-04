@@ -5,13 +5,13 @@ const Personal = ({user}) => {
     return (
 
     <div className='flex flex-col gap-4 font-montserrat items-center
-    sm:items-start'>
+    justify-center'>
         <h2 className='pixel-text text-spice-900'>
             Datos de la cuenta
         </h2>
 
-        <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
-        bg-sand-100/50 text-spice-500">
+        <div className="pixel-border flex items-center align-middle flex-col w-[80%] py-3
+        bg-sand-100/50 text-spice-500 sm:w-full">
 
             <Icon icon="pixel:trophy-solid" className="text-2xl text-spice-900" />
             <p className="pixel-text text-[10px] text-center">
@@ -21,7 +21,7 @@ const Personal = ({user}) => {
 
         </div>
 
-        <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
+        <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-full py-3
         bg-sand-100/50 text-spice-500">
 
             <Icon icon="pixel:star-solid" className="text-2xl  text-spice-900" />
@@ -32,7 +32,7 @@ const Personal = ({user}) => {
 
         </div>
 
-        <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-[50%] py-3
+        <div className="pixel-border flex items-center align-middle flex-col w-[80%] sm:w-full py-3
         bg-sand-100/50 text-spice-500">
 
             <Icon icon="pixel:envelope-solid" className="text-2xl  text-spice-900" />

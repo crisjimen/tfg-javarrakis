@@ -76,7 +76,7 @@ const Settings = () => {
             <form onSubmit={changePassword}
             className='flex flex-col gap-2 mt-4'>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 sm:flex-col">
                     <input type="password" name="currentPassword" id="current"
                     placeholder='Contraseña actual' 
                     className='bg-sand-200 pixel-border text-xs py-2 px-1'
@@ -121,9 +121,10 @@ const Settings = () => {
 
             <Button onClick={handleLogout}
                 className="flex items-center gap-2 cursor-pointer
-                sm:w-1/4 border-sand-200 border-2 bg-sand-200/70
+                sm:w-2/4 border-sand-200 border-2 bg-sand-200/70
                 hover:bg-spice-900 hover:text-sand-200 mt-4
                 hover:border-spice-900 scale-105 transition-all">
+
                 <Icon icon="pixel:logout-solid" className="text-2xl" />
                 Cerrar sesión
             </Button>

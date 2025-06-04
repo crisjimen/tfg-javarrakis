@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService{
     //Obtener niveles completados
     @Override
     public List<UserHistoryDto> getUserHistory(User u) {
-
         return userProgressRepository.getUserProgressByUser(u);
     }
 
@@ -98,7 +97,6 @@ public class UserServiceImpl implements UserService{
             );
         }
         else {
-
             String feedback = openAiService.generateFeedback(request.getUserCode(),
                     request.getExpectedOutput(), output);
 

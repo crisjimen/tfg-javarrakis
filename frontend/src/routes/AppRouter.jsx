@@ -23,8 +23,6 @@ const AppRouter = () => {
         return ( <h3>Loading...</h3> );
     }
 
-    
-
   return (
     <BrowserRouter>
         <Routes>

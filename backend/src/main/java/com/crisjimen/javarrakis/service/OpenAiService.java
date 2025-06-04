@@ -41,10 +41,8 @@ public class OpenAiService {
                 El siguiente fragmento de código se ejecuta correctamente, pero no produce la salida esperada.
                 Código:
                 %s
-        
                 Resultado esperado:
                 %s
-        
                 Resultado obtenido:
                 %s
         

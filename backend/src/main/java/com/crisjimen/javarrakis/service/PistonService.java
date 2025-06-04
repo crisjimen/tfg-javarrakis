@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* Clase que hace la llamada a la API de Piston para la ejecución, validación
+/** Clase que hace la llamada a la API de Piston para la ejecución, validación
     y compilación del código
  */
 
