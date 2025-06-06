@@ -29,11 +29,11 @@
   {
   "id": 3,
   "nombre": "Control de Agua",
-  "descripcionDetallada": "En el desierto de Arrakis, el agua vale más que la vida. Implementa un método `aguaPorPersona` que reciba la cantidad total de agua y el número de personas, y devuelva cuánta agua recibe cada persona (como entero). Si el número de personas es 0, retorna -1.",
+  "descripcionDetallada": "En el desierto de Arrakis, el agua vale más que la vida. Implementa un método `aguaPorPersona` que reciba la cantidad total de agua y el número de personas, y devuelva cuánta agua recibe cada persona (como entero). Si el número de personas es 0, retorna -1. Para ello, utiliza los operadores condicionales if y else.",
   "codigoInicial": "public static int aguaPorPersona(int aguaTotal, int personas) {\n    // Tu código aquí\n}",
   "salidaInterfaz": "21",
   "datosInterfaz": "Total de agua: 84\nPersonas: 4",
-  "codigoPrueba": "public static void main(String[] args) {\n        int resultado = aguaPorPersona(84, 4);\n        if (resultado == 21) {\n            System.out.println(resultado);\n        } else {\n            System.out.println(resultado);\n        }\n    }",
+  "codigoPrueba":  "public static void main(String[] args) {\n    // Validaciones secundarias\n    int t1 = aguaPorPersona(100, 5);\n    int t2 = aguaPorPersona(50, 0);\n\n    if (t1 != 20) {\n        System.out.println(\"Validación secundaria fallida (100 / 5): se esperaba 20 y se obtuvo \" + t1);\n    }\n\n    if (t2 != -1) {\n        System.out.println(\"Validación secundaria fallida (50 / 0): se esperaba -1 y se obtuvo \" + t2);\n    }\n\n    // Validación principal\n    int resultado = aguaPorPersona(84, 4);\n    if (resultado == 21) {\n        System.out.println(resultado);\n    } else {\n        System.out.println(\"Resultado incorrecto. Se esperaba 21 y se obtuvo \" + resultado);\n    }\n}",
   "dificultad": 2,
   "points": 20,
   "objetivo": "Divisiones con validación",

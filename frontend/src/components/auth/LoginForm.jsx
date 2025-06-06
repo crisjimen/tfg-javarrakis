@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
@@ -39,6 +39,10 @@ const LoginForm = () => {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    setError(null);
+  }, [email, password]);
 
   return (
     <div className='flex shadow-sm

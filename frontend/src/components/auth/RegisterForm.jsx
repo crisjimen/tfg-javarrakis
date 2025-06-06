@@ -68,7 +68,7 @@ const RegisterForm = () => {
 
     setError(null);
     
-  }, [username, password, confirmPassword]);
+  }, [username, email, password, confirmPassword]);
 
   return (
     <div className='flex shadow-sm
